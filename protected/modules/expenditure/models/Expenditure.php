@@ -107,4 +107,18 @@ class Expenditure extends CActiveRecord {
         return parent::model($className);
     }
 
+    public function beforeValidate() {
+        if ($this->isNewRecord) 
+            $this->created = time();
+        $this->modified = time();
+
+        return parent::beforeValidate();
+    }
+
+    public function beforeSave() {
+        $cd = date_parse_from_format('d-m-Y', $this->purchase_date);
+        $this->purchase_date = mktime($cd['hour'], $cd['minute'], $cd['second'], $cd['month'], $cd['day'], $cd['year']);
+
+        return parent::beforeSave();
+    }
 }
