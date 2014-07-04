@@ -39,7 +39,22 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'purchase_date'); ?>
-		<?php echo $form->textField($model,'purchase_date',array('size'=>10,'maxlength'=>10)); ?>
+		<?php //echo $form->textField($model,'purchase_date',array('size'=>10,'maxlength'=>10)); ?>
+		<?php
+$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+    'model' => $model,
+    'attribute' => 'purchase_date',
+    'options' => array(
+        'dateFormat' => 'dd-mm-yy',     // format of "2012-12-25"
+        'showOtherMonths' => true,      // show dates in other months
+        'selectOtherMonths' => true,    // can seelect dates in other months
+    ),
+    'htmlOptions' => array(
+        'size' => '10',         // textField size
+        'maxlength' => '10',    // textField maxlength
+    ),
+));
+?>
 		<?php echo $form->error($model,'purchase_date'); ?>
 	</div>
 
