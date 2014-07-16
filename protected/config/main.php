@@ -2,7 +2,6 @@
 
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
-Yii::setPathOfAlias('booster', dirname(__FILE__) . '/../extensions/yiibooster');
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
@@ -14,7 +13,6 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
-        'booster',
     ),
     'modules' => array(
         'expenditure',
@@ -27,9 +25,6 @@ return array(
     ),
     // application components
     'components' => array(
-        'booster' => array(
-            'class' => 'booster.components.Booster',
-        ),
         'user' => array(
             // enable cookie-based authentication
             'allowAutoLogin' => true,

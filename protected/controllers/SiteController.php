@@ -22,11 +22,11 @@ class SiteController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('index'),
+                'actions' => array('logout', 'passwordreset'),
                 'users' => array('@'),
             ),
-            array('allow',
-                'actions' => array('error', 'login', 'contact'),
+            array('allow', // allow admin user to perform 'admin' and 'delete' actions
+                'actions' => array('index', 'Error', 'contact', 'login', 'captcha'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -39,8 +39,8 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        Yii::import('application.modules.expenditure.models.*');
-        //Expenditure::model()->
+        // renders the view file 'protected/views/site/index.php'
+        // using the default layout 'protected/views/layouts/main.php'
         $this->render('index');
     }
 
@@ -83,6 +83,9 @@ class SiteController extends Controller {
      * Displays the login page
      */
     public function actionLogin() {
+        if(Yii::app()->user->id)    
+            $this->redirect(Yii::app()->homeUrl);
+        
         $model = new LoginForm;
 
         // if it is ajax validation request
@@ -110,4 +113,39 @@ class SiteController extends Controller {
         $this->redirect(Yii::app()->homeUrl);
     }
 
+    
+    /**
+     * Displays a particular model.
+     * @param integer $id the ID of the model to be displayed
+     */
+    public function actionPasswordreset() {
+
+        $id = Yii::app()->user->id;
+
+        $user = User::model()->findByPk($id);
+        if (!$user)
+            throw new CHttpException(404, Yum::t('User can not be found'));
+        
+        $form = new UserChangePassword;
+
+        if (isset($_POST['UserChangePassword'])) {
+            $form->attributes = $_POST['UserChangePassword'];
+            $form->validate();
+
+            if (!$form->hasErrors()) {
+                $user->password = md5($form->password);
+                if ($user->save()) {
+                    Yii::app()->user->setFlash('success', 'The new password has been saved');
+                    $this->redirect(array('index'));
+                } else {
+                    Yii::app()->user->setFlash('error', 'There was an error saving the password');
+                }
+            }
+        }
+
+        $this->render('reset', array(
+            'model' => $user,
+            'pform' => $form,
+        ));
+    }
 }
