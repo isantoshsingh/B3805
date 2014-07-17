@@ -22,11 +22,11 @@ class SiteController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('logout', 'passwordreset'),
+                'actions' => array('index', 'logout', 'passwordreset'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('index', 'Error', 'contact', 'login', 'captcha'),
+                'actions' => array('Error', 'contact', 'login', 'captcha'),
                 'users' => array('*'),
             ),
             array('deny', // deny all users
@@ -85,7 +85,7 @@ class SiteController extends Controller {
     public function actionLogin() {
         if(Yii::app()->user->id)    
             $this->redirect(Yii::app()->homeUrl);
-        
+        $this->layout = 'application.views.layouts.login';
         $model = new LoginForm;
 
         // if it is ajax validation request
