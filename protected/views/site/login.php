@@ -39,7 +39,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
                         </div>
                         <div class="checkbox">
                             <?php echo $form->checkBox($model, 'rememberMe'); ?>
-    <?php echo $form->label($model, 'rememberMe'); ?>
+                            <?php echo $form->label($model, 'rememberMe'); ?>
                         </div>
                         
                         <?php echo CHtml::submitButton('Login',array('class'=>'btn btn-lg btn-success btn-block')); ?>

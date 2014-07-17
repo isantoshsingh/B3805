@@ -19,6 +19,7 @@ class SiteController extends Controller {
             ),
         );
     }
+
     public function accessRules() {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -34,14 +35,21 @@ class SiteController extends Controller {
             ),
         );
     }
+
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
-        $this->render('index');
+        Yii::import('application.modules.expenditure.models.*');
+        $criteria = new CDbCriteria;
+
+        $dataProvider = new CActiveDataProvider('Expenditure', array(
+            'criteria' => $criteria)
+        );
+        $this->render('index', array(
+            'dataProvider' => $dataProvider,
+        ));
     }
 
     /**
@@ -83,7 +91,7 @@ class SiteController extends Controller {
      * Displays the login page
      */
     public function actionLogin() {
-        if(Yii::app()->user->id)    
+        if (Yii::app()->user->id)
             $this->redirect(Yii::app()->homeUrl);
         $this->layout = 'application.views.layouts.login';
         $model = new LoginForm;
@@ -113,7 +121,6 @@ class SiteController extends Controller {
         $this->redirect(Yii::app()->homeUrl);
     }
 
-    
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -125,7 +132,7 @@ class SiteController extends Controller {
         $user = User::model()->findByPk($id);
         if (!$user)
             throw new CHttpException(404, Yum::t('User can not be found'));
-        
+
         $form = new UserChangePassword;
 
         if (isset($_POST['UserChangePassword'])) {
@@ -148,4 +155,5 @@ class SiteController extends Controller {
             'pform' => $form,
         ));
     }
+
 }
