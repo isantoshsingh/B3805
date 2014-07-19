@@ -44,7 +44,7 @@ class SiteController extends Controller {
         Yii::import('application.modules.expenditure.models.*');
         $criteria = new CDbCriteria;
 
-        $dataProvider = new CActiveDataProvider('Expenditure', array(
+        $dataProvider = new CActiveDataProvider('User', array(
             'criteria' => $criteria)
         );
         $this->render('index', array(

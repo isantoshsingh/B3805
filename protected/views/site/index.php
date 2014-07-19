@@ -8,7 +8,7 @@ $this->pageTitle=Yii::app()->name;
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
-	'itemView'=>'application.modules.expenditure.views.expenditure._view',
+	'itemView'=>'_view',
 )); ?>
 
 

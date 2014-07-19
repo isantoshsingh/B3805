@@ -10,6 +10,7 @@
 	<?php echo 'Rs. '. CHtml::encode($data->price); ?>
 
 	<?php echo CHtml::encode(date('d/M/y',$data->purchase_date)); ?>
+	<?php //echo CHtml::encode($data->totalValue); ?>
 	<br />
 
 </div>
