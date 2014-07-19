@@ -1,60 +1,94 @@
-<?php /* @var $this Controller */ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+<!DOCTYPE html>
+<html>
 
-	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print" />
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
-	<![endif]-->
+    <head>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
-</head>
+        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-<body>
+        <!-- Core CSS - Include with every page -->
+        <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->request->baseUrl; ?>/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-<div class="container" id="page">
+        <!-- Page-Level Plugin CSS - Forms -->
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
+        <!-- SB Admin CSS - Include with every page -->
+        <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/sb-admin.css" rel="stylesheet">
 
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'Expenditure', 'url'=>array('/expenditure/expenditure/index'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Change Password', 'url'=>array('/site/passwordreset'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
-	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+    </head>
 
-	<?php echo $content; ?>
+    <body>
 
-	<div class="clear"></div>
+        <div id="wrapper">
 
-	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo Yii::app()->baseUrl ?>"><?php echo CHtml::encode(Yii::app()->name); ?></a>
+                </div>
+                <!-- /.navbar-header -->
 
-</div><!-- page -->
+                <ul class="nav navbar-top-links navbar-right">
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="<?php echo $this->createUrl('/site/passwordreset') ?>"><i class="fa fa-gear fa-fw"></i> Change Password</a></li>
+                            <li class="divider"></li>
+                            <li><a href="<?php echo $this->createUrl('/site/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
 
-</body>
+                <div class="navbar-default navbar-static-side" role="navigation">
+                    <div class="sidebar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                <a href="<?php echo $this->createUrl('/site/index') ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/expenditure/expenditure/index') ?>"><i class="fa fa-table fa-fw"></i> Expenditure</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo $this->createUrl('/site/contact') ?>"><i class="fa fa-edit fa-fw"></i> Contact</a>
+                            </li>
+                        </ul>
+                        <!-- /#side-menu -->
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+
+            <div id="page-wrapper">
+
+
+                <?php echo $content; ?>
+
+            </div><!-- page -->
+        </div><!-- page -->
+
+        <!-- Core Scripts - Include with every page -->
+        <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.10.2.js"></script>
+        <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js"></script>
+        <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+        <!-- SB Admin Scripts - Include with every page -->
+        <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/sb-admin.js"></script>
+
+    </body>
+
 </html>
