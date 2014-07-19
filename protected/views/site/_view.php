@@ -4,10 +4,10 @@
             <?php echo CHtml::encode($data->name); ?>
         </div>
         <div class="panel-body">
-            <p><?php echo 'Total: Rs <b>' . CHtml::encode($data->total) . '</b>'; ?></p>
+            <p>Total expenditure till date</p>
         </div>
-<!--        <div class="panel-footer">
-            Panel Footer
-        </div>-->
+        <div class="panel-footer">
+            <?php echo 'Rs <b>' . CHtml::encode($data->total) . '</b>'; ?>
+        </div>
     </div>
 </div>
