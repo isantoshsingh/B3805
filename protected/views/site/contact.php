@@ -31,8 +31,6 @@
             ));
             ?>
 
-            <?php echo $form->errorSummary($model); ?>
-
             <div class="form-group">
                 <?php echo $form->labelEx($model, 'name', array('class' => 'col-sm-2 control-label')); ?>
                 <div class="col-sm-10">
@@ -45,31 +43,31 @@
             <div class="form-group">
                 <?php echo $form->labelEx($model, 'email', array('class' => 'col-sm-2 control-label')); ?>
                 <div class="col-sm-10">
-                <?php echo $form->textField($model, 'email', array('class' => 'form-control')); ?>
-                <?php echo $form->error($model, 'email'); ?>
-            </div>
+                    <?php echo $form->textField($model, 'email', array('class' => 'form-control')); ?>
+                    <?php echo $form->error($model, 'email'); ?>
+                </div>
             </div>
 
             <div class="form-group">
                 <?php echo $form->labelEx($model, 'subject', array('class' => 'col-sm-2 control-label')); ?>
                 <div class="col-sm-10">
-                <?php echo $form->textField($model, 'subject', array('maxlength' => 128, 'class' => 'form-control')); ?>
-                <?php echo $form->error($model, 'subject'); ?>
-            </div>
+                    <?php echo $form->textField($model, 'subject', array('maxlength' => 128, 'class' => 'form-control')); ?>
+                    <?php echo $form->error($model, 'subject'); ?>
+                </div>
             </div>
 
             <div class="form-group">
                 <?php echo $form->labelEx($model, 'body', array('class' => 'col-sm-2 control-label')); ?>
                 <div class="col-sm-10">
-                <?php echo $form->textArea($model, 'body', array('rows' => 6, 'cols' => 50, 'class' => 'form-control')); ?>
-                <?php echo $form->error($model, 'body'); ?>
-            </div>
+                    <?php echo $form->textArea($model, 'body', array('rows' => 6, 'cols' => 50, 'class' => 'form-control')); ?>
+                    <?php echo $form->error($model, 'body'); ?>
+                </div>
             </div>
 
             <?php if (CCaptcha::checkRequirements()): ?>
                 <div class="form-group">
                     <?php echo $form->labelEx($model, 'verifyCode', array('class' => 'col-sm-2 control-label')); ?>
-                <div class="col-sm-10">
+                    <div class="col-sm-10">
                         <?php $this->widget('CCaptcha'); ?>
                         <?php echo $form->textField($model, 'verifyCode', array('class' => 'form-control')); ?>
                     </div>

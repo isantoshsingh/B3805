@@ -16,6 +16,7 @@
 
         <!-- SB Admin CSS - Include with every page -->
         <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/sb-admin.css" rel="stylesheet">
+        <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" rel="stylesheet">
 
     </head>
 

@@ -1,40 +1,48 @@
+<?php $this->pageTitle = Yii::app()->name . ' | Change Password'; ?>
 <?php
-$this->breadcrumbs = array(
-    'reset password',
-);
-
 $this->menu = array(
     array('label' => 'Create Expenditure', 'url' => array('expenditure/expenditure/create')),
     array('label' => 'Manage Expenditure', 'url' => array('expenditure/expenditure/admin')),
 );
 ?>
-
-<h1>User #<?php echo $model->username; ?></h1>
-<div class="form">
-    <?php
-    $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'user-form',
-        'enableAjaxValidation' => false,
-    ));
-    ?>
-
-    <p class="note">Fields with <span class="required">*</span> are required.</p>
-
-    <?php echo $form->errorSummary($model); ?>
-
-    <div class="row">
-        <?php echo $form->labelEx($pform,'password'); ?>
-        <?php echo $form->passwordField($pform, 'password', array('placeholder' => 'New Password', 'maxlength' => 15)); ?>
-        <?php echo $form->error($pform,'password'); ?>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Change Password</h1>
     </div>
-    <div class="row">
-        <?php echo $form->labelEx($pform,'verifyPassword'); ?>
-        <?php echo $form->passwordField($pform, 'verifyPassword', array('placeholder' => 'Confirm Password', 'maxlength' => 15)); ?>
-        <?php echo $form->error($pform,'verifyPassword'); ?>
-    </div>
-    <div class="row">
-        <?php echo CHtml::submitButton('Reset'); ?>
-    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <?php
+        $form = $this->beginWidget('CActiveForm', array(
+            'id' => 'user-form',
+            'htmlOptions' => array(
+                'class' => 'form-horizontal',
+            ),
+            'enableAjaxValidation' => false,
+        ));
+        ?>
 
-    <?php $this->endWidget(); ?>
+        <div class="form-group">
+            <?php echo $form->labelEx($pform, 'password', array('class' => 'col-sm-5 control-label')); ?>
+            <div class="col-sm-7">
+                <?php echo $form->passwordField($pform, 'password', array('placeholder' => 'New Password', 'maxlength' => 15, 'class' => 'form-control')); ?>
+                <?php echo $form->error($pform, 'password'); ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <?php echo $form->labelEx($pform, 'verifyPassword', array('class' => 'col-sm-5 control-label')); ?>
+            <div class="col-sm-7">
+                <?php echo $form->passwordField($pform, 'verifyPassword', array('placeholder' => 'Confirm Password', 'maxlength' => 15, 'class' => 'form-control')); ?>
+                <?php echo $form->error($pform, 'verifyPassword'); ?>
+            </div>
+        </div>
+
+        <div class="col-sm-5"></div>
+        <div class="col-sm-7">
+        <?php echo CHtml::submitButton('Reset', array('class' => 'btn btn-primary')); ?>
+</div>
+
+        <?php $this->endWidget(); ?>
+    </div>
 </div>
