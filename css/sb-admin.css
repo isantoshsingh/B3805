@@ -3,7 +3,6 @@
 /* ------------------------------- */
 
 body {
-    padding-top: 100px;
     background-color: #f8f8f8;
 }
 
@@ -243,7 +242,7 @@ body {
 /* Login Page */
 
 .login-panel {
-    margin-top: 25%;
+    margin-top: 10%;
 }
 
 /* Flot Chart Containers */
