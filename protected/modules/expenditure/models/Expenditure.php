@@ -29,7 +29,7 @@ class Expenditure extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_id, item_name, price, created, modified', 'required'),
+            array('user_id, item_name, price, created, modified, purchase_date', 'required'),
             array('user_id, price, created, modified, purchase_date', 'length', 'max' => 10),
             array('item_name', 'length', 'max' => 255),
             array('description', 'safe'),
