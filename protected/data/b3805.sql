@@ -56,9 +56,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `name`) VALUES
-(1, 'santosh', '35e9388ce176d30442640de29085606d', 'Santosh Singh');
-
+ALTER TABLE `expenditure` ADD COLUMN `with_user` VARCHAR(45) AFTER `purchase_date`;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

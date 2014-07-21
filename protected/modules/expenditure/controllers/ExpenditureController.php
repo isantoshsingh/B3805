@@ -16,11 +16,11 @@ class ExpenditureController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'index', 'view'),
+                'actions' => array('create', 'update', 'index', 'view', 'admin'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
+                'actions' => array('delete'),
                 'users' => array('admin'),
             ),
             array('deny', // deny all users
@@ -52,10 +52,14 @@ class ExpenditureController extends Controller {
         if (isset($_POST['Expenditure'])) {
             $model->attributes = $_POST['Expenditure'];
             $model->user_id = Yii::app()->user->id;
+            $model->with_user = serialize($model->with_user);
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
-
+        $users = User::model()->findAll('id!='.Yii::app()->user->id);
+        foreach ($users as $user)
+            $with[] = $user->id;
+        $model->with_user = $with;
         $this->render('create', array(
             'model' => $model,
         ));
@@ -74,10 +78,11 @@ class ExpenditureController extends Controller {
 
         if (isset($_POST['Expenditure'])) {
             $model->attributes = $_POST['Expenditure'];
+            $model->with_user = serialize($model->with_user);
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
-
+        $model->with_user = unserialize($model->with_user);
         $this->render('update', array(
             'model' => $model,
         ));

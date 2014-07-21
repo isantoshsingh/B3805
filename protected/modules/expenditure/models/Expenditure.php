@@ -12,6 +12,7 @@
  * @property string $created
  * @property string $modified
  * @property string $purchase_date
+ * @property string $with_user
  */
 class Expenditure extends CActiveRecord {
 
@@ -32,10 +33,10 @@ class Expenditure extends CActiveRecord {
             array('user_id, item_name, price, created, modified, purchase_date', 'required'),
             array('user_id, price, created, modified, purchase_date', 'length', 'max' => 10),
             array('item_name', 'length', 'max' => 255),
-            array('description', 'safe'),
+            array('description, with_user', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, user_id, item_name, description, price, created, modified, purchase_date', 'safe', 'on' => 'search'),
+            array('id, user_id, item_name, description, price, purchase_date', 'safe', 'on' => 'search'),
         );
     }
 
@@ -63,6 +64,7 @@ class Expenditure extends CActiveRecord {
             'created' => 'Created',
             'modified' => 'Modified',
             'purchase_date' => 'Purchase Date',
+            'with_user' => 'Includes',
         );
     }
 
@@ -117,7 +119,9 @@ class Expenditure extends CActiveRecord {
 
     public function beforeSave() {
         $cd = date_parse_from_format('d-m-Y', $this->purchase_date);
-        $this->purchase_date = mktime($cd['hour'], $cd['minute'], $cd['second'], $cd['month'], $cd['day'], $cd['year']);
+        //if date has been supplied in the format
+        if(!$cd['error_count'])
+            $this->purchase_date = mktime($cd['hour'], $cd['minute'], $cd['second'], $cd['month'], $cd['day'], $cd['year']);
 
         return parent::beforeSave();
     }

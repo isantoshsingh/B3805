@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo Yii::app()->baseUrl ?>"><?php echo CHtml::encode(Yii::app()->name); ?></a>
+                    <a class="navbar-brand" href="<?php echo Yii::app()->homeUrl ?>"><?php echo CHtml::encode(Yii::app()->name); ?></a>
                 </div>
                 <!-- /.navbar-header -->
 

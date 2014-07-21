@@ -53,7 +53,15 @@
                 ?>
             </div>
         </div>
-
+        <div class="form-group">
+            <?php echo $form->labelEx($model, 'with_user', array('class' => 'col-sm-4 control-label')); ?>
+            <div class="col-sm-8">
+            <?php
+        $data = CHtml::listData(User::model()->findAll('id!='.Yii::app()->user->id), 'id', 'name');
+        echo CHtml::checkBoxList('Expenditure[with_user]', @array_values($model->with_user), $data);
+    ?>
+            </div>
+        </div>
         <div class="col-sm-4"></div>
         <div class="col-sm-8">
             <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn btn-primary')); ?>
