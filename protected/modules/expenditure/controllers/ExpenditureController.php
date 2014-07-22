@@ -52,7 +52,7 @@ class ExpenditureController extends Controller {
         if (isset($_POST['Expenditure'])) {
             $model->attributes = $_POST['Expenditure'];
             $model->user_id = Yii::app()->user->id;
-            $model->with_user = serialize($model->with_user);
+            $model->with_user = @implode(',',$model->with_user);
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
@@ -78,11 +78,11 @@ class ExpenditureController extends Controller {
 
         if (isset($_POST['Expenditure'])) {
             $model->attributes = $_POST['Expenditure'];
-            $model->with_user = serialize($model->with_user);
+            $model->with_user = @implode(',',$model->with_user);
             if ($model->save())
                 $this->redirect(array('view', 'id' => $model->id));
         }
-        $model->with_user = unserialize($model->with_user);
+        $model->with_user = explode(',',$model->with_user);
         $this->render('update', array(
             'model' => $model,
         ));
